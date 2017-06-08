@@ -1,4 +1,5 @@
-scalaVersion in ThisBuild := "2.12.2"
+// Use a scala version supported by scalafix.
+scalaVersion in ThisBuild := org.scalameta.BuildInfo.supportedScalaVersions.last
 
 lazy val rewrites = project.settings(
   libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % "$scalafix_version$"
