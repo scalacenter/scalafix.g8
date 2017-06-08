@@ -1,4 +1,4 @@
-scalaVersion in ThisBuild := "$scala_version$"
+scalaVersion in ThisBuild := "2.12.2"
 
 lazy val rewrites = project.settings(
   libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % "$scalafix_version$"
