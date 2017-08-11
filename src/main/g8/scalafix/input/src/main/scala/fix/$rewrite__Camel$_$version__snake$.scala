@@ -1,4 +1,4 @@
-/* ONLY
+/*
 rewrite = "scala:fix.$rewrite;format="Camel"$_$version;format="snake"$"
 */
 package fix

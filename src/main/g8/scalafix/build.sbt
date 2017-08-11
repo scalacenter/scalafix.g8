@@ -1,19 +1,20 @@
+lazy val V = _root_.scalafix.Versions
 // Use a scala version supported by scalafix.
-scalaVersion in ThisBuild := org.scalameta.BuildInfo.supportedScalaVersions.last
+scalaVersion in ThisBuild := V.scala212
 
 lazy val rewrites = project.settings(
-  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % "$scalafix_version$"
+  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.version
 )
 
 lazy val input = project.settings(
-  scalametaSourceroot := sourceDirectory.in(Compile).value
+  scalafixSourceroot := sourceDirectory.in(Compile).value
 )
 
 lazy val output = project
 
 lazy val tests = project
   .settings(
-    libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % "$scalafix_version$" % Test cross CrossVersion.full,
+    libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.version % Test cross CrossVersion.full,
     buildInfoPackage := "fix",
     buildInfoKeys := Seq[BuildInfoKey](
       "inputSourceroot" ->
