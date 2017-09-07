@@ -1,7 +1,7 @@
-# Scalafix rewrites for $rewrite$
+# Scalafix rules for $rule$
 
-To develop rewrite:
+To develop rule:
 ```
 sbt ~tests/test
-# edit rewrites/src/main/scala/fix/$rewrite;format="Camel"$_$version;format="snake"$.scala
+# edit rules/src/main/scala/fix/$rule;format="Camel"$_$version;format="snake"$.scala
 ```
