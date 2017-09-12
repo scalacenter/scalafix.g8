@@ -1,5 +1,5 @@
 /*
-rule = "scala:fix.$rule;format="Camel"$_$version;format="snake"$"
+rule = "class:rule.$rule;format="Camel"$_$version;format="snake"$"
 */
 package fix
 
