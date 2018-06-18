@@ -4,7 +4,7 @@ import scala.collection.mutable
 import scalafix.v0._
 import scala.meta._
 
-object Scalafixupgrade_v0_6 extends Rule("Scalafix_v0_6") {
+object Scalafixg8_v0_6 extends Rule("Scalafix_v0_6") {
 
   override def fix(ctx: RuleCtx): Patch = {
     val imports = mutable.Map.empty[String, Importer]

@@ -1,5 +1,5 @@
 /*
-rule = "class:fix.Scalafixupgrade_v0_6"
+rule = "class:fix.Scalafixg8_v0_6"
  */
 
 package fix

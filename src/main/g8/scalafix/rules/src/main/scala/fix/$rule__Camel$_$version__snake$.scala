@@ -7,7 +7,6 @@ final case class $rule;format="Camel"$_$version;format="snake"$(index: Semanticd
     extends SemanticRule(index, "$rule;format="Camel"$_$version;format="snake"$") {
 
   override def fix(ctx: RuleCtx): Patch = {
-    ctx.debugIndex()
     println(s"Tree.syntax: " + ctx.tree.syntax)
     println(s"Tree.structure: " + ctx.tree.structure)
     Patch.empty
