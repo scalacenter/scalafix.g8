@@ -1,3 +1,7 @@
+# Automatic migration for scalafix.g8 generated projects
+
+This project contains migration rules to upgrade scalafix.g8 generated builds
+to use the latest Scalafix v0.6 APIs.
 At the root of your scalafix.g8 generated build, run this migration
 
 ```
@@ -5,11 +9,13 @@ export _JAVA_OPTIONS=-Xss1515m # a large stack size is required for the Scala co
 coursier launch ch.epfl.scala:scalafix-cli_2.12.6:0.6.0-M9 --main scalafix.cli.Cli -- -r github:scalacenter/scalafix.g8/v0.6 --verbose
 ```
 
-The rewrite is syntactic and runs on both `*.scala` and `*.sbt` files.
+The rewrite is syntactic and does a best-effort to migrate both `*.scala` and
+`*.sbt` files.
 The rule may not work as expected if you have customized the auto-generated
 build.sbt and test suite.
 
-Running the rewrite should produce a diff like this
+Running the rewrite should produce a diff like this:
+
 ```diff
 diff --git a/scalafix/build.sbt b/scalafix/build.sbt
 index 830ec17d..5f73b8e3 100644
