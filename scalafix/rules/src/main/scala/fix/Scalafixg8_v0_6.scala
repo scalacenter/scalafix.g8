@@ -4,7 +4,38 @@ import scala.collection.mutable
 import scalafix.v1._
 import scala.meta._
 
-class Scalafix06 extends SyntacticRule("Scalafix06") {
+class Scalafixg8_v0_6 extends SyntacticRule("Scalafixg8_v0_6") {
+
+  val isPatchOp = Set(
+    "removeImportee",
+    "addGlobalImport",
+    "replaceToken",
+    "removeTokens",
+    "removeTokens",
+    "removeToken",
+    "replaceTree",
+    "addRight",
+    "addLeft",
+    "addRight",
+    "addLeft",
+    "lint",
+    "removeGlobalImport",
+    "addGlobalImport",
+    "replaceSymbol",
+    "renameSymbol",
+    "replaceSymbols",
+    "replaceSymbols"
+  )
+
+  val isDocOp = Set(
+    "tokenList",
+    "tree",
+    "input",
+    "tokens",
+    "matchingParens",
+    "tokenList",
+    "comments"
+  )
 
   override def fix(implicit doc: Doc): Patch = {
     val imports = mutable.Map.empty[String, Importer]
@@ -17,6 +48,55 @@ class Scalafix06 extends SyntacticRule("Scalafix06") {
     }
 
     doc.tree.traverse {
+      case Init(rule @ Type.Name("Rule"), _, List(List(Lit.String(_)))) =>
+        patch += Patch.replaceTree(rule, "SyntacticRule")
+      case init @ Init(Type.Name("SemanticRule"),
+                       _,
+                       List(List(Term.Name("index"), Lit.String(ruleName)))) =>
+        patch += Patch.replaceTree(init, s"""SemanticRule("$ruleName")""")
+      case Ctor.Primary(
+          _,
+          _,
+          List(
+            List(
+              param @ Term.Param(Nil,
+                                 Term.Name("index"),
+                                 Some(Type.Name("SemanticdbIndex")),
+                                 _)))) =>
+        patch += Patch.removeTokens(param.tokens)
+      case defn @ Defn.Def(
+            _,
+            Term.Name("fix"),
+            Nil,
+            List(
+              List(
+                Term.Param(
+                  Nil,
+                  ctx @ Term.Name("ctx"),
+                  Some(ruleCtx @ Type.Name("RuleCtx")),
+                  None
+                ))
+            ),
+            Some(Type.Name("Patch")),
+            _
+          ) =>
+        patch += Patch.replaceTree(ctx, "implicit doc")
+        val isSemantic = defn.parent.exists {
+          case t: Template =>
+            t.inits.exists {
+              case Init(Type.Name("SemanticRule"), _, _) => true
+              case _                                     => false
+            }
+          case _ => false
+        }
+        val prefix = if (isSemantic) "Semantic" else ""
+        patch += Patch.replaceTree(ruleCtx, prefix + "Doc")
+      case Term.Select(ctx @ Term.Name("ctx"), Term.Name(op)) =>
+        if (isPatchOp(op)) {
+          patch += Patch.replaceTree(ctx, "Patch")
+        } else if (isDocOp(op)) {
+          patch += Patch.replaceTree(ctx, "doc")
+        }
       case q""" $_.enablePlugins(${t @ q"BuildInfoPlugin"})""" =>
         patch += Patch.replaceTree(t, "ScalafixTestkitPlugin")
       case t @ q"""
@@ -77,8 +157,8 @@ class Scalafix06 extends SyntacticRule("Scalafix06") {
         } else if (syntax.startsWith("org.langmeta.") ||
                    syntax.startsWith("scala.meta.")) {
           addImporter(importer"scala.meta._", importees)
-        } else if (syntax.startsWith("scalafix.")) {
-          addImporter(importer"scalafix.v0._", importees)
+        } else if (syntax.startsWith("scalafix")) {
+          addImporter(importer"scalafix.v1._", importees)
         }
       case t @ init"SemanticRuleSuite(..$_)" =>
         patch += Patch.replaceTree(
