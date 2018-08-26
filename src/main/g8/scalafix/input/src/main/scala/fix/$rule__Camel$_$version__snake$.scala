@@ -1,5 +1,5 @@
 /*
-rule = "class:fix.$rule;format="Camel"$_$version;format="snake"$"
+rule = $rule;format="Camel"$_$version;format="snake"$
 */
 package fix
 
