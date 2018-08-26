@@ -20,7 +20,8 @@ object MyRule extends SyntacticRule("MyRule") {
   }
 }
 
-case class MySemanticRule() extends SemanticRule("MySemanticRule") {
+case class MySemanticRule()
+    extends SemanticRule("MySemanticRule") {
   override def fix(implicit doc: SemanticDoc): Patch = {
     Patch.addLeft(doc.tree, "Left")
   }

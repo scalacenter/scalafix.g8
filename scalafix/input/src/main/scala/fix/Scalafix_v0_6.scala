@@ -33,7 +33,8 @@ object MyRule extends Rule("MyRule") {
   }
 }
 
-case class MySemanticRule(index: SemanticdbIndex) extends SemanticRule(index, "MySemanticRule") {
+case class MySemanticRule(index: SemanticdbIndex)
+    extends SemanticRule(index, "MySemanticRule") {
   override def fix(ctx: RuleCtx): Patch = {
     ctx.addLeft(ctx.tree, "Left")
   }

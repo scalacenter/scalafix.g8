@@ -30,7 +30,10 @@ lazy val tests = project
       sourceDirectories.in(input, Compile).value,
     scalafixTestkitInputClasspath :=
       fullClasspath.in(input, Compile).value,
-      compile.in(Compile) := compile.in(Compile).dependsOn(compile.in(input, Compile)).value
+    compile.in(Compile) := compile
+      .in(Compile)
+      .dependsOn(compile.in(input, Compile))
+      .value
   )
   .dependsOn(rules)
   .enablePlugins(ScalafixTestkitPlugin)
