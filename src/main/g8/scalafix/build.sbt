@@ -1,6 +1,17 @@
 lazy val V = _root_.scalafix.sbt.BuildInfo
 inThisBuild(
   List(
+    organization := "com.example",
+    homepage := Some(url("https://github.com/com/example")),
+    licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    developers := List(
+      Developer(
+        "example-username",
+        "Example Full Name",
+        "example@email.com",
+        url("https://example.com")
+      )
+    ),
     scalaVersion := V.scala212,
     addCompilerPlugin(scalafixSemanticdb),
     scalacOptions ++= List(
@@ -9,16 +20,24 @@ inThisBuild(
   )
 )
 
+skip in publish := true
+
 lazy val rules = project.settings(
+  moduleName := "scalafix",
   libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafix
 )
 
-lazy val input = project
+lazy val input = project.settings(
+  skip in publish := true
+)
 
-lazy val output = project
+lazy val output = project.settings(
+  skip in publish := true
+)
 
 lazy val tests = project
   .settings(
+    skip in publish := true,
     libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafix % Test cross CrossVersion.full,
     scalafixTestkitOutputSourceDirectories :=
       sourceDirectories.in(output, Compile).value,
