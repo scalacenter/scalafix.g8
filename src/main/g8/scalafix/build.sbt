@@ -24,7 +24,7 @@ skip in publish := true
 
 lazy val rules = project.settings(
   moduleName := "scalafix",
-  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafix
+  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
 )
 
 lazy val input = project.settings(
@@ -38,7 +38,7 @@ lazy val output = project.settings(
 lazy val tests = project
   .settings(
     skip in publish := true,
-    libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafix % Test cross CrossVersion.full,
+    libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafixVersion % Test cross CrossVersion.full,
     scalafixTestkitOutputSourceDirectories :=
       sourceDirectories.in(output, Compile).value,
     scalafixTestkitInputSourceDirectories :=
