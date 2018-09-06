@@ -9,6 +9,7 @@ class $rule;format="Camel"$_$version;format="snake"$
   override def fix(implicit doc: SemanticDocument): Patch = {
     println(s"Tree.syntax: " + doc.tree.syntax)
     println(s"Tree.structure: " + doc.tree.structure)
+    println(s"Tree.structureLabeled: " + doc.tree.structureLabeled)
     Patch.empty
   }
 
