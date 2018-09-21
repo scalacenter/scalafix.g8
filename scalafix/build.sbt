@@ -1,4 +1,4 @@
-lazy val V = _root_.scalafix.Versions
+lazy val V = _root_.scalafix.sbt.BuildInfo
 // Use a scala version supported by scalafix.
 inThisBuild(
   List(
@@ -9,31 +9,31 @@ inThisBuild(
 )
 
 lazy val rules = project.settings(
-  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.version
+  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafix
 )
 
 lazy val input = project.settings(
-  scalaVersion := "2.12.4",
-  scalacOptions += {
-    val sourceroot = sourceDirectory.in(Compile).value / "scala"
-    s"-P:semanticdb:sourceroot:$sourceroot"
-  },
-  libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % "0.5.10" cross CrossVersion.full
+  scalaVersion := "2.12.6",
+  libraryDependencies += "ch.epfl.scala" % "scalafix-testkit_2.12.4" % "0.5.10"
 )
 
 lazy val output = project.settings(
-  libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.version cross CrossVersion.full
+  libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafix cross CrossVersion.full
 )
 
 lazy val tests = project
   .settings(
-    libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.version % Test cross CrossVersion.full,
+    libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafix % Test cross CrossVersion.full,
     scalafixTestkitOutputSourceDirectories :=
       sourceDirectories.in(output, Compile).value,
     scalafixTestkitInputSourceDirectories :=
       sourceDirectories.in(input, Compile).value,
     scalafixTestkitInputClasspath :=
       fullClasspath.in(input, Compile).value,
+    compile.in(Compile) := compile
+      .in(Compile)
+      .dependsOn(compile.in(input, Compile))
+      .value
   )
-  .dependsOn(input, rules)
+  .dependsOn(rules)
   .enablePlugins(ScalafixTestkitPlugin)

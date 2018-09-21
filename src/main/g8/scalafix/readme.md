@@ -1,7 +1,7 @@
-# Scalafix rules for $rule$
+# Scalafix rules for $repo$
 
 To develop rule:
 ```
 sbt ~tests/test
-# edit rules/src/main/scala/fix/$rule;format="Camel"$_$version;format="snake"$.scala
+# edit rules/src/main/scala/fix/$repo;format="Camel"$.scala
 ```

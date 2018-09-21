@@ -1,6 +1,8 @@
 language: scala
 script:
+  - ./scalafmt --test
   - sbt test
+  - cd scalafix && sbt test
 jdk:
   - oraclejdk8
 
