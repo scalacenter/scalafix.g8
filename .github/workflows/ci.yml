@@ -1,0 +1,17 @@
+name: CI
+on:
+  push:
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: olafurpg/setup-scala@v6
+      - run: ./scalafmt --test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: olafurpg/setup-scala@v6
+      - run: sbt test
+      - run: cd scalafix && sbt test

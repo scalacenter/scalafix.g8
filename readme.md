@@ -1,3 +1,5 @@
+[![Build status](https://github.com/scalacenter/scalafix.g8/workflows/CI/badge.svg)](https://github.com/scalacenter/scalafix.g8/actions?query=workflow)
+
 # Giter8 template to create Scalafix rules
 
 Assuming you are located inside the directory `myproject`:
