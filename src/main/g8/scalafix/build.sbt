@@ -1,6 +1,8 @@
 lazy val V = _root_.scalafix.sbt.BuildInfo
 inThisBuild(
   List(
+    scalaVersion := V.scala212,
+    crossScalaVersions := List(V.scala213, V.scala212, V.scala211),
     organization := "com.example",
     homepage := Some(url("https://github.com/com/example")),
     licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
@@ -12,7 +14,6 @@ inThisBuild(
         url("https://example.com")
       )
     ),
-    scalaVersion := V.scala212,
     addCompilerPlugin(scalafixSemanticdb),
     scalacOptions ++= List(
       "-Yrangepos",

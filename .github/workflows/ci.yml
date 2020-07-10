@@ -1,6 +1,5 @@
 name: CI
-on:
-  push:
+on: [push, pull_request]
 jobs:
   formatting:
     runs-on: ubuntu-latest
