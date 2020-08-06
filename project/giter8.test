@@ -1,1 +1,3 @@
-> tests/test
+# This template creates an sbt build in a subdirectory named "scalafix"
+# so we can't run traditional scripted test that assumes src/main/g8 to contain a build
+> about

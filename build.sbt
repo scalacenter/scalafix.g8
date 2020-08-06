@@ -1,15 +1,16 @@
-lazy val root = project
-  .in(file("."))
+import scala.sys.process._
+
+lazy val root = (project in file("."))
   .settings(
-    name := "hello-world",
-    resolvers += Resolver.typesafeIvyRepo("releases"),
-    test in Test := {
+    name := "scalafix.g8-root",
+    Test / test := {
+      val _ = (Test / g8Test).toTask("").value
       val s = streams.value
-      val _ = (g8Test in Test).toTask("").value
-      val process = new ProcessBuilder("sbt", "tests/test")
-        .directory(file("target/g8/scalafix"))
-        .start()
-      assert(process.exitValue() == 0, "Non-zero exit from sbt tests/test")
+      s.log.info(
+        "running our own sbt in the copied directory to mimic the scripted test")
+      val p = Process(Seq("sbt", "tests/test"),
+                      (Test / g8 / target).value / "scalafix").run()
+      assert(p.exitValue() == 0, "Non-zero exit from sbt tests/test")
     },
     scriptedLaunchOpts ++= List(
       "-Xms1024m",
