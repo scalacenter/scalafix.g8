@@ -24,3 +24,11 @@ If the rule is a linter that prohibits vars, the name can be `NoVars`.
 To try out the latest Scalafix milestone in the v0.6.x series,
 follow the instructions from the readme in the [scalafix/](scalafix/readme.md)
 directory.
+
+## Template license
+
+Written in 2020 by Scala Center
+
+To the extent possible under law, the author(s) have dedicated all copyright and related
+and neighboring rights to this template to the public domain worldwide.
+This template is distributed without any warranty. See <https://creativecommons.org/publicdomain/zero/1.0/>.
