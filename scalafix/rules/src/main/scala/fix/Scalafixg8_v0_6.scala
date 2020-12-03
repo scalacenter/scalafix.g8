@@ -112,9 +112,9 @@ class Scalafixg8_v0_6 extends SyntacticRule("Scalafixg8_v0_6") {
         patch += Patch.replaceTree(
           t,
           """scalafixTestkitOutputSourceDirectories :=
-            |      sourceDirectories.in(output, Compile).value,
+            |      unmanagedSourceDirectories.in(output, Compile).value,
             |    scalafixTestkitInputSourceDirectories :=
-            |      sourceDirectories.in(input, Compile).value,
+            |      unmanagedSourceDirectories.in(input, Compile).value,
             |    scalafixTestkitInputClasspath :=
             |      fullClasspath.in(input, Compile).value""".stripMargin
         )
