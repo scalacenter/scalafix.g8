@@ -61,9 +61,9 @@ index 830ec17d..5f73b8e3 100644
 -    )
 +    
 +    scalafixTestkitOutputSourceDirectories :=
-+      sourceDirectories.in(output, Compile).value,
++      unmanagedSourceDirectories.in(output, Compile).value,
 +    scalafixTestkitInputSourceDirectories :=
-+      sourceDirectories.in(input, Compile).value,
++      unmanagedSourceDirectories.in(input, Compile).value,
 +    scalafixTestkitInputClasspath :=
 +      fullClasspath.in(input, Compile).value
    )
