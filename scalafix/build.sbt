@@ -25,14 +25,14 @@ lazy val tests = project
   .settings(
     libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafix % Test cross CrossVersion.full,
     scalafixTestkitOutputSourceDirectories :=
-      unmanagedSourceDirectories.in(output, Compile).value,
+      (output / Compile / unmanagedSourceDirectories).value,
     scalafixTestkitInputSourceDirectories :=
-      unmanagedSourceDirectories.in(input, Compile).value,
+      (input / Compile / unmanagedSourceDirectories).value,
     scalafixTestkitInputClasspath :=
-      fullClasspath.in(input, Compile).value,
-    compile.in(Compile) := compile
+      (input / Compile / fullClasspath).value,
+    Compile / compile := compile
       .in(Compile)
-      .dependsOn(compile.in(input, Compile))
+      .dependsOn(input / Compile / compile)
       .value
   )
   .dependsOn(rules)
