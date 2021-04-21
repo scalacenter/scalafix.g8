@@ -5,7 +5,7 @@
 Assuming you are located inside the directory `myproject`:
 
 ```
-sbt new scalacenter/scalafix.g8 --rule=myproject --version=v1
+sbt new scalacenter/scalafix.g8
 cd scalafix
 sbt tests/test
 ```
