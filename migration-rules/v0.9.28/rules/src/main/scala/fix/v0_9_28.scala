@@ -11,7 +11,8 @@ class v0_9_28 extends SemanticRule("v0_9_28") {
       case t @ Importee.Name(Name("SemanticRuleSuite")) =>
         Patch.removeImportee(t) +
           Patch.addGlobalImport(
-            importer"scalafix.testkit.AbstractSemanticRuleSuite")
+            importer"scalafix.testkit.AbstractSemanticRuleSuite"
+          )
       case t @ init"SemanticRuleSuite(..$_)" =>
         Patch.addGlobalImport(importer"org.scalatest.FunSuiteLike") +
           Patch.replaceTree(t, "AbstractSemanticRuleSuite with FunSuiteLike")

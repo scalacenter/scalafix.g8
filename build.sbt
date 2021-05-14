@@ -7,9 +7,12 @@ lazy val root = (project in file("."))
       val _ = (Test / g8Test).toTask("").value
       val s = streams.value
       s.log.info(
-        "running our own sbt in the copied directory to mimic the scripted test")
-      val p = Process(Seq("sbt", "tests/test"),
-                      (Test / g8 / target).value / "scalafix").run()
+        "running our own sbt in the copied directory to mimic the scripted test"
+      )
+      val p = Process(
+        Seq("sbt", "tests/test"),
+        (Test / g8 / target).value / "scalafix"
+      ).run()
       assert(p.exitValue() == 0, "Non-zero exit from sbt tests/test")
     },
     scriptedLaunchOpts ++= List(
