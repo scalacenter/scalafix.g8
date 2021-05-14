@@ -5,7 +5,9 @@ inThisBuild(
     crossScalaVersions := List(V.scala213, V.scala212, V.scala211),
     organization := "com.example",
     homepage := Some(url("https://github.com/com/example")),
-    licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    licenses := List(
+      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+    ),
     developers := List(
       Developer(
         "example-username",
