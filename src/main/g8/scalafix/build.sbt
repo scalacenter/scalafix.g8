@@ -14,9 +14,9 @@ inThisBuild(
         url("https://example.com")
       )
     ),
-    addCompilerPlugin(scalafixSemanticdb),
+    semanticdbEnabled := true,
+    semanticdbVersion := scalafixSemanticdb.revision,
     scalacOptions ++= List(
-      "-Yrangepos",
       "-P:semanticdb:synthetics:on"
     )
   )
@@ -49,6 +49,10 @@ lazy val tests = project
       (input / Compile / unmanagedSourceDirectories).value,
     scalafixTestkitInputClasspath :=
       (input / Compile / fullClasspath).value,
+    scalafixTestkitInputScalacOptions :=
+      (input / Compile / scalacOptions).value,
+    scalafixTestkitInputScalaVersion :=
+      (input / Compile / scalaVersion).value
   )
   .dependsOn(rules)
   .enablePlugins(ScalafixTestkitPlugin)
