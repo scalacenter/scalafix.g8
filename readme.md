@@ -19,12 +19,12 @@ For example, if the rule contains migration rules for version
 If the rule is a linter that prohibits vars, the name can be `NoVars`.
 
 
-## migration-rules
+## migration-rules under scalafix folder
 We keep here migration rules used to make easier the upgrade of Scalafix Versions when breaking binary and source
 compatibilities
 
-- v0.6.x: a migration rule to help the migration to 0.6.x
-- v0.9.28: After deprecating SemanticRule and SyntacticRule classes provided by scalafix-testkit, this rule will
+- scalafix/v0.6.x: a migration rule to help the migration to 0.6.x
+- scalafix/v0.9.28: After deprecating SemanticRule and SyntacticRule classes provided by scalafix-testkit, this rule will
   automatically fix SemanticRule class usage in code sources that still rely on it.
 
 
