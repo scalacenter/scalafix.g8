@@ -18,4 +18,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
-      - run: find scalafix/ -mindepth 1 -maxdepth 1 -type d -execdir sh -c 'cd {} && sbt test' \;
+      - run: ls -1 scalafix | xargs -I{} sh -c 'cd scalafix/{} && sbt test'
