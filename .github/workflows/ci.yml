@@ -22,4 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
-      - run: ls -1 scalafix | xargs -I{} sh -c 'cd scalafix/{} && sbt test'
+      - run: ls -1 migration-rules | xargs -I{} sh -c 'cd migration-rules/{} && sbt test'
