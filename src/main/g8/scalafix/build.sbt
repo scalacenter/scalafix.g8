@@ -47,13 +47,7 @@ lazy val input = projectMatrix
     publish / skip := true
   )
   .defaultAxes(VirtualAxis.jvm)
-  .jvmPlatform(
-    scalaVersions = rulesCrossVersions,
-    settings = Seq(
-      scalacOptions += "-P:semanticdb:synthetics:on"
-    )
-  )
-  .jvmPlatform(scalaVersions = Seq(scala3Version))
+  .jvmPlatform(scalaVersions = rulesCrossVersions :+ scala3Version)
 
 lazy val output = projectMatrix
   .settings(
