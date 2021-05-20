@@ -30,8 +30,7 @@ lazy val tests = project
       (input / Compile / unmanagedSourceDirectories).value,
     scalafixTestkitInputClasspath :=
       (input / Compile / fullClasspath).value,
-    Compile / compile := compile
-      .in(Compile)
+    Compile / compile := (Compile / compile)
       .dependsOn(input / Compile / compile)
       .value
   )
