@@ -20,8 +20,6 @@ class v0_9_28 extends SemanticRule("v0_9_28") {
         Patch.addGlobalImport(importer"org.scalatest.FunSuiteLike") +
           Patch.replaceTree(t, "AbstractSemanticRuleSuite with FunSuiteLike")
 
-      case t @ q"classOf[..$tpesnel]" =>
-        Patch.replaceTree(t, "classOf[AbstractSemanticRuleSuite]")
     }.asPatch
   }
 }
