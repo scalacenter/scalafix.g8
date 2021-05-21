@@ -50,19 +50,26 @@ class Scalafixg8_v0_6 extends SyntacticRule("Scalafixg8_v0_6") {
     doc.tree.traverse {
       case Init(rule @ Type.Name("Rule"), _, List(List(Lit.String(_)))) =>
         patch += Patch.replaceTree(rule, "SyntacticRule")
-      case init @ Init(Type.Name("SemanticRule"),
-                       _,
-                       List(List(Term.Name("index"), Lit.String(ruleName)))) =>
+      case init @ Init(
+            Type.Name("SemanticRule"),
+            _,
+            List(List(Term.Name("index"), Lit.String(ruleName)))
+          ) =>
         patch += Patch.replaceTree(init, s"""SemanticRule("$ruleName")""")
       case Ctor.Primary(
-          _,
-          _,
-          List(
+            _,
+            _,
             List(
-              param @ Term.Param(Nil,
-                                 Term.Name("index"),
-                                 Some(Type.Name("SemanticdbIndex")),
-                                 _)))) =>
+              List(
+                param @ Term.Param(
+                  Nil,
+                  Term.Name("index"),
+                  Some(Type.Name("SemanticdbIndex")),
+                  _
+                )
+              )
+            )
+          ) =>
         patch += Patch.removeTokens(param.tokens)
       case defn @ Defn.Def(
             _,
@@ -75,7 +82,8 @@ class Scalafixg8_v0_6 extends SyntacticRule("Scalafixg8_v0_6") {
                   ctx @ Term.Name("ctx"),
                   Some(ruleCtx @ Type.Name("RuleCtx")),
                   None
-                ))
+                )
+              )
             ),
             Some(Type.Name("Patch")),
             _
@@ -151,11 +159,15 @@ class Scalafixg8_v0_6 extends SyntacticRule("Scalafixg8_v0_6") {
         )
       case Importer(ref, importees) =>
         val syntax = ref.syntax
-        if (syntax.startsWith("scala.meta.contrib") ||
-            syntax.startsWith("scalafix.syntax")) {
+        if (
+          syntax.startsWith("scala.meta.contrib") ||
+          syntax.startsWith("scalafix.syntax")
+        ) {
           // do nothing
-        } else if (syntax.startsWith("org.langmeta.") ||
-                   syntax.startsWith("scala.meta.")) {
+        } else if (
+          syntax.startsWith("org.langmeta.") ||
+          syntax.startsWith("scala.meta.")
+        ) {
           addImporter(importer"scala.meta._", importees)
         } else if (syntax.startsWith("scalafix")) {
           addImporter(importer"scalafix.v1._", importees)
