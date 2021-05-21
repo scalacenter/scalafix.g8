@@ -10,12 +10,12 @@ class v0_9_28 extends SemanticRule("v0_9_28") {
     val symbolMatcger = SymbolMatcher.exact("scalafix/testkit/SemanticRuleSuite#")
     doc.tree.collect {
       case t @ Importee.Name(Name("SemanticRuleSuite")) =>
-        Patch.removeImportee(t) +
-          Patch.addGlobalImport(
-            importer"scalafix.testkit.AbstractSemanticRuleSuite"
-          )
+        Patch.removeImportee(t)
 
       case symbolMatcger(tree) if tree.isInstanceOf[Init] =>
+        Patch.addGlobalImport(
+          importer"scalafix.testkit.AbstractSemanticRuleSuite"
+        ) +
         Patch.addGlobalImport(importer"org.scalatest.FunSuiteLike") +
           Patch.replaceTree(tree, "AbstractSemanticRuleSuite with FunSuiteLike")
 
