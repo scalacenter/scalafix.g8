@@ -11,9 +11,3 @@ class OldSemanticRule extends SemanticRuleSuite() {
 class OldSemanticRule1 extends SemanticRuleSuite {
   runAllTests()
 }
-class OldSemanticRule2 extends scalafix.testkit.SemanticRuleSuite {
-  runAllTests()
-}
-class OldSemanticRule3 extends scalafix.testkit.SemanticRuleSuite() {
-  runAllTests()
-}
