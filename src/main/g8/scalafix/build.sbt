@@ -58,6 +58,9 @@ lazy val output = projectMatrix
 
 lazy val testsAggregate = Project("tests", file("target/testsAggregate"))
   .aggregate(tests.projectRefs: _*)
+  .settings(
+    publish / skip := true
+  )
 
 lazy val tests = projectMatrix
   .settings(
