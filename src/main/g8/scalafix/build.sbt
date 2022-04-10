@@ -83,24 +83,24 @@ lazy val tests = projectMatrix
   .defaultAxes(
     rulesCrossVersions.map(VirtualAxis.scalaABIVersion) :+ VirtualAxis.jvm: _*
   )
-  .customRow(
+  .jvmPlatform(
     scalaVersions = Seq(V.scala212),
-    axisValues = Seq(TargetAxis(scala3Version), VirtualAxis.jvm),
+    axisValues = Seq(TargetAxis(scala3Version)),
     settings = Seq()
   )
-  .customRow(
+  .jvmPlatform(
     scalaVersions = Seq(V.scala213),
-    axisValues = Seq(TargetAxis(V.scala213), VirtualAxis.jvm),
+    axisValues = Seq(TargetAxis(V.scala213)),
     settings = Seq()
   )
-  .customRow(
+  .jvmPlatform(
     scalaVersions = Seq(V.scala212),
-    axisValues = Seq(TargetAxis(V.scala212), VirtualAxis.jvm),
+    axisValues = Seq(TargetAxis(V.scala212)),
     settings = Seq()
   )
-  .customRow(
+  .jvmPlatform(
     scalaVersions = Seq(V.scala211),
-    axisValues = Seq(TargetAxis(V.scala211), VirtualAxis.jvm),
+    axisValues = Seq(TargetAxis(V.scala211)),
     settings = Seq()
   )
   .dependsOn(rules)
