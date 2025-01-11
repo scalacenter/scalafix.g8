@@ -22,6 +22,7 @@ jobs:
         with:
           java-version: 8
           distribution: temurin
+      - uses: sbt/setup-sbt@v1
       - run: sbt test
   migration-rules:
     runs-on: ubuntu-latest
@@ -31,4 +32,5 @@ jobs:
         with:
           java-version: 8
           distribution: temurin
+      - uses: sbt/setup-sbt@v1
       - run: ls -1 migration-rules | xargs -I{} sh -c 'cd migration-rules/{} && sbt test'
