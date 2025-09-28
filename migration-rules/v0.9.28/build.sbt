@@ -19,8 +19,7 @@ lazy val input = project.settings(
 )
 lazy val output = project.settings(
   (publish / skip) := true,
-  resolvers += Resolver.sonatypeRepo("snapshots"),
-  libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % "0.9.27+81-ab0c497d-SNAPSHOT" cross CrossVersion.full // move to 0.9.28 once released
+  libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafixVersion cross CrossVersion.full
 )
 
 lazy val tests = project
